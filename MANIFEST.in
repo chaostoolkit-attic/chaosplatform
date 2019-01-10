@@ -1,0 +1,13 @@
+graft tests
+
+include .coveragerc
+include .editorconfig
+
+include CHANGELOG.md
+include LICENSE
+include README.md
+include requirements.txt
+include requirements-dev.txt
+include chaosplatform/logging.json
+
+global-exclude *.py[cod] __pycache__

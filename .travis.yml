@@ -1,0 +1,28 @@
+language: python
+sudo: false
+cache: pip
+env:
+  global:
+    - LD_PRELOAD=/lib/x86_64-linux-gnu/libSegFault.so
+    - SEGFAULT_SIGNALS=all
+    - PYPI_USER_NAME: chaostoolkit
+    - secure: "PSt+oeant2oDvxAj0/LLU26k+WA7uHUiFTbnSHhAyXIaPrXOuZXjhCQe93TUnZ+OqRJOFfcwmUkF8Dx0bWVw/cibB0hMzaKe3LVJ5C3ReSLLtRmEuhTZUO+IAPzc2mu/3/uzm5vdH1PoZDf9Gfh+2mtQ3z7897iF4kI7UPEphu+pt2anc+H2YQhd9efp1NXZsbx76cMUUqtOJ0IhwRcGGzjcovxKaEAO/+EkPqHjg6RkuFawiYQNUjxg72nNPNi3aeWeADkvE4i1MrIuHKvWDVG2M/JoHGFkyy5NFVGeTRyKg7PAyP99A+3xFiniOyaud1kiOO84dI+eA2lKD6vjRbDlbyQ2nEuwwm0RGxaEROpRg8eJJ5X2xYEPJv4+1xzSIGpil3KVz0MG4p3czUDI3iCEPnWARbMJBDxqxl858PNjGRL+W3ICUAIIVsabFGafU6S2VptQ+BmPCYoEuk1qpATaG5gouLomI9sfTSHmyNHtDSoLkVo0kT4r4XUl31bX0UthIit2WHX9P7u5pwMNjn0UplQzY8/adw2+XKGxkIEu2jv/riZ7DZP7GIuxi2VSuqHOTUyWFKGn2nAKItel9wHXmZVKWq9dTscfbUtg9hJs1QQq5LbDLNAVz/hyv6LjGMHJTZ6dxjCST7Fkn3k4NWnx61yy1vemJHgpzJWuwPs="
+python:
+  - "3.6"
+  - "3.7-dev"
+install:
+  - virtualenv --version
+  - easy_install --version
+  - pip --version
+  - pip install --pre -r requirements.txt -r requirements-dev.txt
+script:
+  - bash ci.bash
+notifications:
+  webhooks:
+    urls:
+    - "https://webhook.atomist.com/atomist/travis/teams/T76U4GPGF"
+    on_cancel: always
+    on_error: always
+    on_start: always
+    on_failure: always
+    on_success: always
