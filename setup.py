@@ -41,7 +41,7 @@ with io.open('requirements.txt') as f:
 
 
 setup(
-    name='chaoshub-control-plane',
+    name='chaosplatform',
     version=get_version_from_package(),
     license='Apache Software License 2.0',
     description='The control plane of the Chaos Platform',
