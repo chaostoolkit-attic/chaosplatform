@@ -11,8 +11,8 @@ Flask-Dance==1.1.0
 Flask-Dance[sqla]==1.1.0
 Flask-Login==0.4.1
 simplejson==3.15.0
-sqlalchemy==1.2.15
-sqlalchemy-utils==0.33.9
+sqlalchemy>=1.2.8
+sqlalchemy-utils>=0.33.3
 sqlalchemy-json==0.2.1
 python-dotenv==0.9.1
 grpcio==1.17.1
