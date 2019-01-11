@@ -7,8 +7,8 @@ flask-caching==1.4.0
 cherrypy==18.0.1
 wsgi-request-logger==0.4.6
 Flask-SQLAlchemy==2.3.2
-Flask-Dance==1.1.0
-Flask-Dance[sqla]==1.1.0
+Flask-Dance==1.2.0
+Flask-Dance[sqla]==1.2.0
 Flask-Login==0.4.1
 simplejson==3.15.0
 sqlalchemy>=1.2.8
