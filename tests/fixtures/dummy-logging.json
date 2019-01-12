@@ -1,0 +1,30 @@
+{
+    "version": 1,
+
+    "formatters": {
+        "standard": {
+            "format": "%(asctime)s.%(msecs)03d [%(levelname)s] %(message)s",
+            "datefmt": "%Y-%m-%dT%H:%M:%S"
+        }
+    },
+    "handlers": {
+        "default": {
+            "level":"ERROR",
+            "class":"logging.StreamHandler",
+            "formatter": "standard",
+            "stream": "ext://sys.stdout"
+        }
+    },
+    "loggers": {
+        "": {
+            "handlers": ["default"],
+            "level": "INFO",
+            "propagate": false
+        },
+        "chaosplatform": {
+            "handlers": ["default"],
+            "level": "ERROR" ,
+            "propagate": false
+        }
+    }
+}

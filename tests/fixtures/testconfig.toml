@@ -1,0 +1,173 @@
+[chaosplatform]
+debug = false
+secret_key = "whatever"
+
+    [chaosplatform.grpc]
+    address = "0.0.0.0:50051"
+
+    [chaosplatform.http]
+    address = "0.0.0.0:8090"
+    debug = false
+    proxy = "http://localhost:6080"
+    environment = "production"
+
+    [chaosplatform.cache]
+    type = "redis"
+    host = "localhost"
+    port = 6379
+
+    [chaosplatform.jwt]
+    secret_key = "whatever"
+    public_key = "whatever"
+    algorithm = "HS256"
+    identity_claim_key = "identity"
+    user_claims_key = "user_claims"
+    access_token_expires = 2592000
+    refresh_token_expires = 1800
+    user_claims_in_refresh_token = true
+
+    [chaosplatform.oauth2]
+        [chaosplatform.oauth2.github]   
+        client_id = "c85003deb196bef943d7"
+        client_secret = "301c249e85c9e0ec352d836ff8b73c190fd5cd79"
+
+    [chaosplatform.account]
+        [chaosplatform.account.http]
+        address = "0.0.0.0:11080"
+        debug = false
+        proxy = "http://localhost:6080"
+
+        [chaosplatform.account.grpc]
+        address = "0.0.0.0:50051"
+
+        [chaosplatform.account.db]
+        uri = "sqlite:////tmp/file.db"
+        debug = false
+
+        [chaosplatform.account.jwt]
+        secret_key = "whatever"
+        public_key = "whatever"
+        algorithm = "HS256"
+        identity_claim_key = "identity"
+        user_claims_key = "user_claims"
+        access_token_expires = 2592000
+        refresh_token_expires = 1800
+        user_claims_in_refresh_token = true
+
+    [chaosplatform.auth]
+        [chaosplatform.auth.http]
+        address = "0.0.0.0:11081"
+        debug = false
+        proxy = "http://localhost:6080"
+
+        [chaosplatform.auth.grpc]
+        address = "0.0.0.0:50052"
+
+            [chaosplatform.auth.grpc.account]
+            address = "0.0.0.0:50051"
+
+        [chaosplatform.auth.db]
+        uri = "sqlite:////tmp/file.db"
+        debug = false
+
+        [chaosplatform.auth.jwt]
+        secret_key = "whatever"
+        public_key = "whatever"
+        algorithm = "HS256"
+        identity_claim_key = "identity"
+        user_claims_key = "user_claims"
+        access_token_expires = 2592000
+        refresh_token_expires = 1800
+        user_claims_in_refresh_token = true
+
+    [chaosplatform.experiment]
+        [chaosplatform.experiment.http]
+        address = "0.0.0.0:11082"
+        debug = false
+        proxy = "http://localhost:6080"
+
+        [chaosplatform.experiment.grpc]
+        address = "0.0.0.0:50053"
+
+        [chaosplatform.experiment.db]
+        uri = "sqlite:////tmp/file.db"
+        debug = false
+
+        [chaosplatform.experiment.jwt]
+        secret_key = "whatever"
+        public_key = "whatever"
+        algorithm = "HS256"
+        identity_claim_key = "identity"
+        user_claims_key = "user_claims"
+        access_token_expires = 2592000
+        refresh_token_expires = 1800
+        user_claims_in_refresh_token = true
+
+    [chaosplatform.scheduling]
+        [chaosplatform.scheduling.http]
+        address = "0.0.0.0:11082"
+        debug = false
+        proxy = "http://localhost:6080"
+
+        [chaosplatform.scheduling.grpc]
+        address = "0.0.0.0:50053"
+
+            [chaosplatform.scheduling.grpc.scheduler]
+            address = "0.0.0.0:50051"
+
+        [chaosplatform.scheduling.db]
+        uri = "sqlite:////tmp/file.db"
+        debug = false
+
+        [chaosplatform.scheduling.jwt]
+        secret_key = "whatever"
+        public_key = "whatever"
+        algorithm = "HS256"
+        identity_claim_key = "identity"
+        user_claims_key = "user_claims"
+        access_token_expires = 2592000
+        refresh_token_expires = 1800
+        user_claims_in_refresh_token = true
+
+    [chaosplatform.scheduler]
+        [chaosplatform.scheduler.http]
+        address = "0.0.0.0:11082"
+        debug = false
+        proxy = "http://localhost:6080"
+
+        [chaosplatform.scheduler.grpc]
+        address = "0.0.0.0:50053"
+
+        [chaosplatform.scheduler.db]
+        uri = "sqlite:////tmp/file.db"
+        debug = false
+
+        [chaosplatform.scheduler.redis]
+        host = "localhost"
+        port = 6379
+        queue = "chaosplatform"
+
+        [chaosplatform.scheduler.jwt]
+        secret_key = "whatever"
+        public_key = "whatever"
+        algorithm = "HS256"
+        identity_claim_key = "identity"
+        user_claims_key = "user_claims"
+        access_token_expires = 2592000
+        refresh_token_expires = 1800
+        user_claims_in_refresh_token = true
+
+        [chaosplatform.scheduler.job]
+        platform_url = "http://127.0.0.1:6080"
+
+        [chaosplatform.scheduler.worker]
+        debug = true
+        count = 3
+        queue_name = "chaosplatform"
+        worker_name = "chaosplatform-worker"
+        add_random_suffix_to_worker_name = true
+        worker_directory = "/tmp"
+
+        [chaosplatform.scheduler.worker.redis]
+        host = "localhost"
+        port = 6379
