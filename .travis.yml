@@ -12,7 +12,7 @@ python:
   - "3.7-dev"
 install:
   - virtualenv --version
-  - easy_install --version
+  - pip install -U pip setuptools
   - pip --version
   - pip install --pre -r requirements.txt -r requirements-dev.txt
 script:
