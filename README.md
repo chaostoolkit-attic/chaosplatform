@@ -11,6 +11,122 @@ This is the [Chaos Platform][chaosplatform] main project.
 
 [chaosplatform]: https://chaosplatform.org/
 
+* WARNING*: This is an alpha release so expect things to get rocky and break for
+now. We are heavily working on it although the API should remain stable. Please,
+join the [slack][slack] to keep the discussion alive :) Thank you for being
+patient with us!
+
+[slack]: https://join.chaostoolkit.org/
+
+## Install & Run
+
+Documentation is being written so the instructions here are for the courageous.
+
+* Install Python 3.6+. No promises are made for lower versions.
+* Create a Python virtual environment
+* Install pip
+* Install Redis via a simple Docker image
+
+```
+$ docker run --rm --name redis -p 6379:6379 redis
+```
+
+* Install the Chaos Platform
+
+```
+$ pip install --pre -U chaosplatform
+```
+
+* Create a chaosplatform.toml configuration file:
+
+
+```toml
+[chaosplatform]
+debug = false
+
+    [chaosplatform.grpc]
+    address = "0.0.0.0:50051"
+
+    [chaosplatform.http]
+    address = "0.0.0.0:8090"
+    secret_key = ""
+
+        [chaosplatform.http.cherrypy]
+        environment = "production"
+        proxy = "http://localhost:6080"
+
+    [chaosplatform.cache]
+    type = "simple"
+
+        # Only set if type is set to "redis"
+        # [chaosplatform.cache.redis]
+        # host = "localhost"
+        # port = 6379
+
+    [chaosplatform.db]
+    uri = "sqlite:///:memory"
+
+    [chaosplatform.jwt]
+    secret_key = ""
+    public_key = ""
+    algorithm = "HS256"
+    identity_claim_key = "identity"
+    user_claims_key = "user_claims"
+    access_token_expires = 2592000
+    refresh_token_expires = 31536000
+    user_claims_in_refresh_token = false
+
+    [chaosplatform.account]
+
+    [chaosplatform.auth]
+        [chaosplatform.auth.oauth2]
+            [chaosplatform.auth.oauth2.github]
+            client_id = ""
+            client_secret = ""
+
+        [chaosplatform.auth.grpc]
+            [chaosplatform.auth.grpc.account]
+            address = "0.0.0.0:50051"
+
+    [chaosplatform.experiment]
+
+    [chaosplatform.scheduling]
+        [chaosplatform.scheduling.grpc]
+            [chaosplatform.scheduling.grpc.scheduler]
+            address = "0.0.0.0:50051"
+
+    [chaosplatform.scheduler]
+        [chaosplatform.scheduler.redis]
+        host = "localhost"
+        port = 6379
+        queue = "chaosplatform"
+
+        [chaosplatform.scheduler.job]
+        platform_url = "http://127.0.0.1:6080"
+
+        [chaosplatform.scheduler.worker]
+        debug = false
+        count = 3
+        queue_name = "chaosplatform"
+        worker_name = "chaosplatform-worker"
+        add_random_suffix_to_worker_name = true
+        worker_directory = "/tmp"
+
+        [chaosplatform.scheduler.worker.redis]
+        host = "localhost"
+        port = 6379
+```
+
+* Run the Chaos Platform:
+
+```
+$ chaosplatform run --config=chaosplatform.toml
+```
+
+For now, the platform is GUI-less so needs to be called bia its [API][openapi].
+
+[openapi]: https://github.com/chaostoolkit/chaosplatform-openapi
+
 ## Contribute
 
 Contributors to this project are welcome as this is an open-source effort that
