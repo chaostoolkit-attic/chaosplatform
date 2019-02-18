@@ -31,6 +31,12 @@
             "backupCount": 20,
             "encoding": "utf8"
         },
+        "cherrypy_access_stdout": {
+            "level":"INFO",
+            "class": "logging.StreamHandler",
+            "formatter": "void",
+            "stream": "ext://sys.stdout"
+        },
         "cherrypy_error": {
             "level":"INFO",
             "class": "logging.handlers.RotatingFileHandler",
@@ -58,7 +64,7 @@
             "propagate": false
         },
         "cherrypy.access": {
-            "handlers": ["cherrypy_access"],
+            "handlers": ["cherrypy_access", "cherrypy_access_stdout"],
             "level": "INFO",
             "propagate": false
         },

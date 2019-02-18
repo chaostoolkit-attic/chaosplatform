@@ -1,4 +1,5 @@
 import logging
+import os
 from typing import Any, Dict, Tuple
 
 from chaosplt_account.server import initialize_all as init_account, \
@@ -13,6 +14,7 @@ from chaosplt_scheduling.server import initialize_all as init_scheduling, \
     release_all as release_scheduling
 from chaosplt_grpc import create_grpc_server, start_grpc_server, \
     stop_grpc_server
+from chaosplt_dashboard.server import serve_ui
 import cherrypy
 from flask import Flask
 from grpc import Server as GRPCServer
@@ -23,6 +25,7 @@ from .cache import setup_cache
 from .service import Services
 
 __all__ = ["initialize_all", "release_all", "run_forever"]
+logger = logging.getLogger("chaosplatform")
 
 
 def initialize_all(config: Dict[str, Any]) \
@@ -70,6 +73,9 @@ def initialize_all(config: Dict[str, Any]) \
     serve_app(web_app, "/", access_log_handler)
     serve_api(api_app, "/api/v1", access_log_handler)
 
+    if config.get("ui") is True:
+        serve_ui()
+
     return (
         web_app, api_app, services, grpc_server, auth_resources,
         account_resources, scheduler_resources, scheduling_resources,
@@ -106,6 +112,11 @@ def run_forever(config: Dict[str, Any]):
 
     cherrypy.engine.subscribe(
         'start', lambda: run_stuff(config), priority=80)
+
+    if "tls" in config["http"]:
+        cherrypy.server.ssl_module = 'builtin'
+        cherrypy.server.ssl_certificate = config["http"]["tls"]["certificate"]
+        cherrypy.server.ssl_private_key = config["http"]["tls"]["key"]
 
     cherrypy.engine.signals.subscribe()
     cherrypy.engine.start()

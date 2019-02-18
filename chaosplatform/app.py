@@ -43,9 +43,9 @@ def create_app(config: Dict[str, Any]) -> Flask:
         provider = backend.upper()
         provider_config = oauth2_config[backend]
 
-        app.config["_OAUTH_CLIENT_ID".format(provider)] = \
+        app.config["{}_OAUTH_CLIENT_ID".format(provider)] = \
             provider_config["client_id"]
-        app.config["_OAUTH_CLIENT_SECRET".format(provider)] = \
+        app.config["{}_OAUTH_CLIENT_SECRET".format(provider)] = \
             provider_config["client_secret"]
 
     setup_login(app, from_session=True)

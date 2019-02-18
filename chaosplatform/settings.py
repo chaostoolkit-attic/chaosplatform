@@ -25,6 +25,7 @@ def load_settings(toml_path: str) -> Dict[str, Any]:
         'server.socket_host': host,
         'server.socket_port': int(port),
         'engine.autoreload.on': False,
+        'checker.on': False,
         'log.screen': debug,
         'log.access_file': cherrypy_config.get("access_file", ""),
         'log.error_file': cherrypy_config.get("error_file", ""),

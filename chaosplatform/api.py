@@ -28,6 +28,8 @@ def create_api(config: Dict[str, Any]) -> Flask:
     app.config["SECRET_KEY"] = config["http"]["secret_key"]
     app.secret_key = config["http"]["secret_key"]
     app.config["JWT_SECRET_KEY"] = config["jwt"]["secret_key"]
+    app.config['JWT_BLACKLIST_ENABLED'] = True
+    app.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access', 'refresh']
     app.config["SQLALCHEMY_DATABASE_URI"] = config["db"]["uri"]
 
     app.config["CACHE_TYPE"] = config["cache"].get("type", "simple")
